@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Faces</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.8/p5.js" charset="utf-8"></script>
+
+  </head>
+  <body>
+
+    <script type="text/javascript">
+
+      class Face {
+        constructor(x, y, colour) {
+          this.x = x
+          this.y = y
+          this.size = 100
+          this.color = colour
+          this.eyeColor = 'black'
+          this.leftEye = {x: this.x-20, y: this.y}
+          this.rightEye = {x: this.x+20, y: this.y}
+          this.mouth = {x: this.x, y: this.y+20}
+        }
+        render() { // renders the face
+          fill(this.color)
+          ellipse(this.x, this.y, this.size, this.size) // face
+          fill(this.eyeColor)
+          ellipse(this.leftEye.x, this.leftEye.y, 15, 15) // eye
+          ellipse(this.rightEye.x, this.rightEye.y, 15, 15)
+          fill('tomato')
+          var mouthSize = mouseY/20 // goes from 0 - 40
+          ellipse(this.mouth.x, this.mouth.y, 40, mouthSize) // mouth
+        }
+      }
+
+      var theFaces // global variable, array that holds all the faces
+
+      function setup() {
+        createCanvas(400, 400)
+        // theFace = new Face(230, 100, 'yellow')
+        theFaces = []
+      }
+
+      function draw() {
+        background(128)
+        theFaces.forEach(function(f) {
+        f.render()
+        })
+
+        // theFace.render()
+
+        // // face
+        // fill('yellow') // face color
+        // ellipse(200,150, 100,100) // face shape
+        // fill('black')
+        // ellipse(180, 145, 20, 20) // right eye
+        // ellipse(220, 145, 20, 20) // left eye
+        // fill('tomato')
+        // ellipse(200, 170, 40, 20) // mouth
+      }
+
+      function mousePressed() {
+        // new face at position mouse x and mouse y with a color of yellow,
+        // everytime the mouse is pressed
+        theFaces.push(new Face(mouseX, mouseY, 'yellow'))
+      }
+    </script>
+  </body>
+</html>
